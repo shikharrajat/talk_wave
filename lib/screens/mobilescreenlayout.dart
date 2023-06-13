@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '/colors.dart';
+import '/widgets/contact_list.dart';
 
 class MobileLayoutScreen extends StatelessWidget {
   const MobileLayoutScreen({Key? key}) : super(key: key);
@@ -10,19 +11,20 @@ class MobileLayoutScreen extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: appbarColor,
           title: const Text('TalkWave',
               style: TextStyle(
-                  color: Colors.black,
+                  color: Color.fromARGB(255, 32, 123, 227),
                   fontSize: 20,
                   fontWeight: FontWeight.bold)),
           centerTitle: false,
           actions: [
             IconButton(
-              icon: const Icon(Icons.search, color: Colors.grey),
+              icon: const Icon(Icons.search, color: Colors.blue),
               onPressed: () {},
             ),
             IconButton(
-              icon: const Icon(Icons.more_vert, color: Colors.grey),
+              icon: const Icon(Icons.more_vert, color: Colors.blue),
               onPressed: () {},
             ),
           ],
@@ -30,7 +32,7 @@ class MobileLayoutScreen extends StatelessWidget {
             indicatorColor: tabColor,
             indicatorWeight: 4,
             labelColor: tabColor,
-            unselectedLabelColor: Colors.grey,
+            unselectedLabelColor: Colors.blueAccent,
             labelStyle: TextStyle(
               fontWeight: FontWeight.bold,
             ),
@@ -47,6 +49,7 @@ class MobileLayoutScreen extends StatelessWidget {
             ],
           ),
         ),
+        body: const ContactsList(),
       ),
     );
   }
