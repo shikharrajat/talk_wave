@@ -4,6 +4,7 @@ import '/widgets/contact_list.dart';
 import '/widgets/web_profile_bar.dart';
 import '/widgets/web_search_bar.dart';
 import '/widgets/web_chat_appbar.dart';
+import 'package:talk_wave/widgets/chat_list.dart';
 
 class WebLayoutScreen extends StatelessWidget {
   const WebLayoutScreen({Key? key}) : super(key: key);
@@ -39,6 +40,7 @@ class WebLayoutScreen extends StatelessWidget {
             child: Column(
               children: [
                 ChatAppBar(),
+                Expanded(child: ChatList()),
               ],
             ),
           ),
