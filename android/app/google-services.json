@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "486465317976",
+    "project_id": "talkwave-3f347",
+    "storage_bucket": "talkwave-3f347.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486465317976:android:8c56c6cad3c71f432fee2d",
+        "android_client_info": {
+          "package_name": "com.example.talk_wave"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486465317976-8117i2448vq7aqgmd0tmo80m3hvmn8mv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_uXVnxQU5qv-v4WOEJPQwHoryW77CgMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486465317976-8117i2448vq7aqgmd0tmo80m3hvmn8mv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
