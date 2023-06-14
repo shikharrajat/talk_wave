@@ -10,33 +10,34 @@ class WebLayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Row(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: const [
-                WebProfileBar(),
-                WebSearchBar(),
-                ContactsList(),
-              ],
+      body: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: const [
+                  WebProfileBar(),
+                  WebSearchBar(),
+                  ContactsList(),
+                ],
+              ),
             ),
           ),
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width * 0.75,
-          decoration: const BoxDecoration(
-            border: Border(
-              left: BorderSide(color: dividerColor),
-            ),
-            image: DecorationImage(
-              image: AssetImage('assets/background.png'),
-              fit: BoxFit.cover,
+          Container(
+            width: MediaQuery.of(context).size.width * 0.75,
+            decoration: const BoxDecoration(
+              border: Border(
+                left: BorderSide(color: dividerColor),
+              ),
+              image: DecorationImage(
+                image: AssetImage('assets/background.png'),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-        ),
-      ],
-    ));
+        ],
+      ),
+    );
   }
 }
