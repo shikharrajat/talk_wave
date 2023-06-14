@@ -1,10 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'screens/mobilescreenlayout.dart';
 import './colors.dart';
+import 'package:talk_wave/firebase_options.dart';
 import 'screens/webscreenlayout.dart';
 import './responsive/responsive_layout.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const TalkWave());
 }
 
