@@ -37,7 +37,7 @@ class WebLayoutScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            child: Column(
+            child:  Column(
               children: [
                 ChatAppBar(),
                 Expanded(child: ChatList()),
