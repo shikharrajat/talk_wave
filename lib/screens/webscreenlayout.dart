@@ -3,6 +3,7 @@ import '/colors.dart';
 import '/widgets/contact_list.dart';
 import '/widgets/web_profile_bar.dart';
 import '/widgets/web_search_bar.dart';
+import '/widgets/web_chat_appbar.dart';
 
 class WebLayoutScreen extends StatelessWidget {
   const WebLayoutScreen({Key? key}) : super(key: key);
@@ -34,6 +35,11 @@ class WebLayoutScreen extends StatelessWidget {
                 image: AssetImage('assets/background.png'),
                 fit: BoxFit.cover,
               ),
+            ),
+            child: Column(
+              children: [
+                ChatAppBar(),
+              ],
             ),
           ),
         ],
