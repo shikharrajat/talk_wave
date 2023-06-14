@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '/colors.dart';
-
+import 'package:talk_wave/common/widgets/custom_button.dart';
 
 
 class LandingScreen extends StatelessWidget {
@@ -40,6 +40,13 @@ class LandingScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
+            SizedBox(
+              width: size.width * 0.75,
+              child: CustomButton(
+                text: 'AGREE AND CONTINUE',
+                onPressed: () => {},
+              ),
+            ),
           ],
         ),
       ),
