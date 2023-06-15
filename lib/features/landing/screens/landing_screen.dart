@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import '/colors.dart';
 import 'package:talk_wave/common/widgets/custom_button.dart';
-
+import 'package:talk_wave/features/auth/screens/login_screen.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({Key? key}) : super(key: key);
+
+  void navigateToLoginScreen(BuildContext context) {
+    Navigator.pushNamed(context, LoginScreen.routeName);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +29,10 @@ class LandingScreen extends StatelessWidget {
             ),
             SizedBox(height: size.height / 9),
             Image.asset(
-              'assets/bg.png',
+              'assets/landing_bg.png',
               height: 340,
               width: 340,
-              color: tabColor,
+              
             ),
             SizedBox(height: size.height / 9),
             const Padding(
@@ -44,7 +48,7 @@ class LandingScreen extends StatelessWidget {
               width: size.width * 0.75,
               child: CustomButton(
                 text: 'AGREE AND CONTINUE',
-                onPressed: () => {},
+                onPressed: () => navigateToLoginScreen(context),
               ),
             ),
           ],
