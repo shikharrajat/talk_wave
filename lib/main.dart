@@ -5,6 +5,8 @@ import './colors.dart';
 import 'package:talk_wave/firebase_options.dart';
 import 'screens/webscreenlayout.dart';
 import './responsive/responsive_layout.dart';
+import 'features/landing/screens/landing_screen.dart';
+import 'router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,9 +27,9 @@ class TalkWave extends StatelessWidget {
         title: 'TalkWave',
         theme: ThemeData.dark().copyWith(
           scaffoldBackgroundColor: backgroundColor,
+          appBarTheme: const AppBarTheme(color: appBarColor),
         ),
-        home: const ResponsiveLayout(
-            mobileScreenLayout: MobileLayoutScreen(),
-            webScreenLayout: WebLayoutScreen()));
+        onGenerateRoute: ((settings) => generateRoute(settings)),
+        home: const LandingScreen());
   }
 }
