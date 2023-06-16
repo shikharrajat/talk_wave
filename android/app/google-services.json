@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "486465317976-7ci78d0kvv047s7r9frm45ak8vgqkhqn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.talk_wave",
+            "certificate_hash": "1dce5c7aeeff1c6ed86fd9219d6d21e142bacaa4"
+          }
+        },
+        {
           "client_id": "486465317976-8117i2448vq7aqgmd0tmo80m3hvmn8mv.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "486465317976-8117i2448vq7aqgmd0tmo80m3hvmn8mv.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "486465317976-82slepra3cuatahqqp4vlaiecgjqml7c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.talkWave"
+              }
             }
           ]
         }
