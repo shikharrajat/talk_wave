@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const backgroundColor = Colors.white;
+const backgroundColor = Color.fromARGB(255, 238, 139, 139);
 const tabColor = Color.fromRGBO(54, 169, 236, 1);
 const appbarColor = Color.fromRGBO(8, 37, 55, 1);
 const dividerColor = Colors.grey;
