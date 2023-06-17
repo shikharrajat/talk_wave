@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:talk_wave/screens/mobile_chat_screen.dart';
+import 'package:talk_wave/features/chat/screens/mobile_chat_screen.dart';
 import '/colors.dart';
 import '/info.dart';
 
@@ -19,7 +19,7 @@ class ContactsList extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => MobileChatScreen()));
+                      builder: (context) => const MobileChatScreen(name:'shik',uid:'12345')));
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
