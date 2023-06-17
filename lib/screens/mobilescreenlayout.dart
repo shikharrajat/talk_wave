@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:talk_wave/features/select_contacts/screens/select_contact_screen.dart';
 import '/colors.dart';
 import '/widgets/contact_list.dart';
 
@@ -51,7 +52,9 @@ class MobileLayoutScreen extends StatelessWidget {
         ),
         body: const ContactsList(),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, SelectContactsScreen.routeName);
+          },
           backgroundColor: tabColor,
           child: const Icon(
             Icons.comment,

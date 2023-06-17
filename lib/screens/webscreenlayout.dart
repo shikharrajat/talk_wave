@@ -15,10 +15,10 @@ class WebLayoutScreen extends StatelessWidget {
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Expanded(
+          const Expanded(
             child: SingleChildScrollView(
               child: Column(
-                children: const [
+                children: [
                   WebProfileBar(),
                   WebSearchBar(),
                   ContactsList(),
@@ -39,8 +39,8 @@ class WebLayoutScreen extends StatelessWidget {
             ),
             child:  Column(
               children: [
-                ChatAppBar(),
-                Expanded(child: ChatList()),
+                const ChatAppBar(),
+                const Expanded(child: ChatList()),
                 Container(
                   height: MediaQuery.of(context).size.height * 0.07,
                   padding: const EdgeInsets.all(10),
