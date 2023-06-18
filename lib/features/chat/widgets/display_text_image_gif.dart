@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:talk_wave/common/enums/message_enum.dart';
 
+
 class DisplayTextImageGIF extends StatelessWidget {
   final String message;
   final MessageEnum type;
