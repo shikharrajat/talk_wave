@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '/colors.dart';
-import '/widgets/contact_list.dart';
+import '../features/chat/widgets/contact_list.dart';
 import '/widgets/web_profile_bar.dart';
 import '/widgets/web_search_bar.dart';
 import '/widgets/web_chat_appbar.dart';
-import 'package:talk_wave/widgets/chat_list.dart';
+import 'package:talk_wave/features/chat/widgets/chat_list.dart';
 
 class WebLayoutScreen extends StatelessWidget {
   const WebLayoutScreen({Key? key}) : super(key: key);
@@ -40,7 +40,7 @@ class WebLayoutScreen extends StatelessWidget {
             child:  Column(
               children: [
                 const ChatAppBar(),
-                const Expanded(child: ChatList()),
+                const Expanded(child: ChatList( recieverUserId: '',)),
                 Container(
                   height: MediaQuery.of(context).size.height * 0.07,
                   padding: const EdgeInsets.all(10),

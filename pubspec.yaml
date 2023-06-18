@@ -45,6 +45,7 @@ dependencies:
   flutter_contacts: ^1.1.6
   permission_handler: ^10.3.0
   uuid: ^3.0.7
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

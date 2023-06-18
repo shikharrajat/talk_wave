@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:talk_wave/features/select_contacts/screens/select_contact_screen.dart';
 import '/colors.dart';
-import '/widgets/contact_list.dart';
+import '../features/chat/widgets/contact_list.dart';
 
 class MobileLayoutScreen extends StatelessWidget {
   const MobileLayoutScreen({Key? key}) : super(key: key);
