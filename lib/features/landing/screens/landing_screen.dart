@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/colors.dart';
+import '../../../common/utils/colors.dart';
 import 'package:talk_wave/common/widgets/custom_button.dart';
 import 'package:talk_wave/features/auth/screens/login_screen.dart';
 
