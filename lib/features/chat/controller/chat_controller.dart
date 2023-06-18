@@ -3,9 +3,9 @@ import 'package:talk_wave/features/chat/repository/chat_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:talk_wave/features/auth/controller/auth_controller.dart';
-import 'package:talk_wave/features/chat/repository/chat_repository.dart';
 import 'package:talk_wave/models/chat_contact.dart';
 import 'package:talk_wave/models/message.dart';
+import 'package:talk_wave/common/enums/message_enum.dart';
 
 final chatControllerProvider = Provider((ref) {
   final chatRepository = ref.watch(chatRepositoryProvider);
@@ -49,6 +49,25 @@ void sendTextMessage(
           ),
         );
    
+  }
+
+   void sendFileMessage(
+    BuildContext context,
+    File file,
+    String recieverUserId,
+    MessageEnum messageEnum
+  ) {
+    
+    ref.read(userDataAuthProvider).whenData(
+          (value) => chatRepository.sendFileMessage(
+            context: context,
+            file: file,
+            recieverUserId: recieverUserId,
+            senderUserData: value!,
+            messageEnum: messageEnum,
+            ref: ref,
+          ),
+        );
   }
 
 }
