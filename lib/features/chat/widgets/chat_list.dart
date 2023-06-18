@@ -3,9 +3,9 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:talk_wave/features/chat/controller/chat_controller.dart';
 import 'package:talk_wave/models/message.dart';
-import 'package:talk_wave/widgets/sender_message_card.dart';
+import 'package:talk_wave/features/chat/widgets/sender_message_card.dart';
 import '/info.dart';
-import 'package:talk_wave/widgets/my_message_card.dart';
+import 'package:talk_wave/features/chat/widgets/my_message_card.dart';
 import 'package:talk_wave/common/widgets/loader.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -53,11 +53,13 @@ final ScrollController messageController = ScrollController();
                 return MyMessageCard(
                     message: messageData.text,
                     date:  timeSent,
+                    type: messageData.type,
                   );
                 }
                 return SenderMessageCard(
                   message: messageData.text,
                   date: timeSent,
+                  type: messageData.type,
                 );
               });
         });
