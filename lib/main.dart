@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'screens/mobilescreenlayout.dart';
-import './colors.dart';
+import 'common/utils/colors.dart';
 import 'package:talk_wave/firebase_options.dart';
 import 'features/landing/screens/landing_screen.dart';
 import 'router.dart';

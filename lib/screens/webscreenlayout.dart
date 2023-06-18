@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/colors.dart';
+import '../common/utils/colors.dart';
 import '../features/chat/widgets/contact_list.dart';
 import '/widgets/web_profile_bar.dart';
 import '/widgets/web_search_bar.dart';

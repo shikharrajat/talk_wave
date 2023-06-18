@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:talk_wave/features/select_contacts/screens/select_contact_screen.dart';
-import '/colors.dart';
+import '../common/utils/colors.dart';
 import '../features/chat/widgets/contact_list.dart';
 import 'package:talk_wave/features/auth/controller/auth_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
