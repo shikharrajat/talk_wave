@@ -6,6 +6,8 @@ import 'package:talk_wave/features/auth/controller/auth_controller.dart';
 import 'package:talk_wave/models/chat_contact.dart';
 import 'package:talk_wave/models/message.dart';
 import 'package:talk_wave/common/enums/message_enum.dart';
+import 'package:talk_wave/common/providers/message_relpy_provider.dart';
+
 
 final chatControllerProvider = Provider((ref) {
   final chatRepository = ref.watch(chatRepositoryProvider);
@@ -31,33 +33,31 @@ class ChatController {
     return chatRepository.getChatStream(recieverUserId);
   }
 
-void sendTextMessage(
+  void sendTextMessage(
     BuildContext context,
     String text,
     String recieverUserId,
-   
   ) {
-    
+    final messageReply = ref.read(messageReplyProvider);
     ref.read(userDataAuthProvider).whenData(
           (value) => chatRepository.sendTextMessage(
             context: context,
             text: text,
             recieverUserId: recieverUserId,
             senderUser: value!,
-         
-          
+            messageReply: messageReply,
           ),
         );
-   
+    ref.read(messageReplyProvider.state).update((state) => null);
   }
 
-   void sendFileMessage(
+  void sendFileMessage(
     BuildContext context,
     File file,
     String recieverUserId,
-    MessageEnum messageEnum
+    MessageEnum messageEnum,
   ) {
-    
+    final messageReply = ref.read(messageReplyProvider);
     ref.read(userDataAuthProvider).whenData(
           (value) => chatRepository.sendFileMessage(
             context: context,
@@ -66,16 +66,18 @@ void sendTextMessage(
             senderUserData: value!,
             messageEnum: messageEnum,
             ref: ref,
+            messageReply: messageReply,
           ),
         );
+    ref.read(messageReplyProvider.state).update((state) => null);
   }
 
- void sendGIFMessage(
+  void sendGIFMessage(
     BuildContext context,
     String gifUrl,
     String recieverUserId,
   ) {
-   
+    final messageReply = ref.read(messageReplyProvider);
     int gifUrlPartIndex = gifUrl.lastIndexOf('-') + 1;
     String gifUrlPart = gifUrl.substring(gifUrlPartIndex);
     String newgifUrl = 'https://i.giphy.com/media/$gifUrlPart/200.gif';
@@ -86,9 +88,10 @@ void sendTextMessage(
             gifUrl: newgifUrl,
             recieverUserId: recieverUserId,
             senderUser: value!,
-           
+            messageReply: messageReply,
           ),
         );
+    ref.read(messageReplyProvider.state).update((state) => null);
   }
 
 }
