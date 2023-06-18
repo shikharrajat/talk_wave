@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:talk_wave/models/user_model.dart';
 import '/colors.dart';
 import '/info.dart';
-import '/widgets/chat_list.dart';
+import '../widgets/chat_list.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:talk_wave/features/auth/controller/auth_controller.dart';
 import 'package:talk_wave/common/widgets/loader.dart';
@@ -57,8 +57,8 @@ class MobileChatScreen extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          const Expanded(
-            child: ChatList(),
+           Expanded(
+            child: ChatList(recieverUserId: uid),
           ),
           BottomChatField(recieverUserId: uid),
         ],
