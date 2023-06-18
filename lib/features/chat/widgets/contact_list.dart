@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import '/colors.dart';
+import '../../../common/utils/colors.dart';
 import '/common/widgets/loader.dart';
 import '/features/chat/controller/chat_controller.dart';
 import '/features/chat/screens/mobile_chat_screen.dart';
