@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:talk_wave/colors.dart';
 import 'package:talk_wave/features/chat/controller/chat_controller.dart';
 import 'package:talk_wave/common/enums/message_enum.dart';
-import 'package:talk_wave/models/message.dart';
 import 'package:talk_wave/common/utils/utils.dart';
 import 'dart:io';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+
 
 class BottomChatField extends ConsumerStatefulWidget {
   final String recieverUserId;
@@ -59,6 +59,17 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     File? video = await pickVideoFromGallery(context);
     if (video != null) {
       sendFileMessage(video, MessageEnum.video);
+    }
+  }
+
+   void selectGIF() async {
+    final gif = await pickGIF(context);
+    if (gif != null) {
+      ref.read(chatControllerProvider).sendGIFMessage(
+            context,
+            gif.url,
+            widget.recieverUserId,
+          );
     }
   }
 
