@@ -10,6 +10,7 @@ import 'package:talk_wave/models/message.dart';
 import 'package:talk_wave/common/enums/message_enum.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../common/providers/message_relpy_provider.dart';
 
 
  
@@ -128,11 +129,11 @@ void _saveMessageToMessageSubcollection({
     required String messageId,
     required String username,
     required MessageEnum messageType,
-   
+    required MessageReply? messageReply,
     required String senderUsername,
     required String? recieverUserName,
   }) async {
-    final message = Message(
+     final message = Message(
       senderId: auth.currentUser!.uid,
       recieverid: recieverUserId,
       text: text,
@@ -140,6 +141,14 @@ void _saveMessageToMessageSubcollection({
       timeSent: timeSent,
       messageId: messageId,
       isSeen: false,
+      repliedMessage: messageReply == null ? '' : messageReply.message,
+      repliedTo: messageReply == null
+          ? ''
+          : messageReply.isMe
+              ? senderUsername
+              : recieverUserName ?? '',
+      repliedMessageType:
+          messageReply == null ? MessageEnum.text : messageReply.messageEnum,
     );
      {
       // users -> sender id -> reciever id -> messages -> message id -> store message
@@ -172,6 +181,7 @@ void _saveMessageToMessageSubcollection({
     required String text,
     required String recieverUserId,
     required UserModel senderUser,
+    required MessageReply? messageReply
   }) async {
     try {
       var timeSent = DateTime.now();
@@ -198,9 +208,8 @@ void _saveMessageToMessageSubcollection({
         messageType: MessageEnum.text,
         messageId: messageId,
         username: senderUser.name,
-        recieverUserName: recieverUserData?.name,
-        senderUsername: senderUser.name,
-      
+        recieverUserName: recieverUserData.name,
+        senderUsername: senderUser.name, messageReply: messageReply,
       );
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
@@ -213,7 +222,8 @@ void _saveMessageToMessageSubcollection({
     required String recieverUserId,
     required UserModel senderUserData,
     required ProviderRef ref,
-    required MessageEnum messageEnum
+    required MessageEnum messageEnum,
+      required MessageReply? messageReply,
   }) async {
     try {
       var timeSent = DateTime.now();
@@ -257,9 +267,8 @@ void _saveMessageToMessageSubcollection({
         contactMsg,
         timeSent,
         recieverUserId,
-      
+     
       );
-
       _saveMessageToMessageSubcollection(
         recieverUserId: recieverUserId,
         text: imageUrl,
@@ -267,7 +276,7 @@ void _saveMessageToMessageSubcollection({
         messageId: messageId,
         username: senderUserData.name,
         messageType: messageEnum,
-       
+        messageReply: messageReply,
         recieverUserName: recieverUserData.name,
         senderUsername: senderUserData.name,
       );
@@ -282,6 +291,7 @@ void _saveMessageToMessageSubcollection({
     required String gifUrl,
     required String recieverUserId,
     required UserModel senderUser,
+    required MessageReply? messageReply,
   }) async {
     try {
       var timeSent = DateTime.now();
@@ -310,8 +320,9 @@ void _saveMessageToMessageSubcollection({
         messageType: MessageEnum.gif,
         messageId: messageId,
         username: senderUser.name,
-        recieverUserName: recieverUserData?.name,
-        senderUsername: senderUser.name,
+        recieverUserName: recieverUserData.name,
+        senderUsername: senderUser.name, 
+        messageReply: messageReply,
       );
     } catch (e) {
       showSnackBar(context: context, content: e.toString());
