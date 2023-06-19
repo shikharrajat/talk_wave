@@ -3,7 +3,7 @@ import 'package:flutter_contacts/contact.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '/common/widgets/error.dart';
 import '/common/widgets/loader.dart';
-import 'package:talk_wave/features/select_contacts/controller/select_controller.dart';
+import 'package:talk_wave/features/select_contacts/controller/select_contact_controller.dart';
 
 class SelectContactsScreen extends ConsumerWidget {
   static const String routeName = '/select-contact';
