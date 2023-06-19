@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:talk_wave/features/stories/screens/confirm_stories_screen.dart';
 import 'package:talk_wave/features/stories/screens/stories_contact_screen.dart';
 import 'package:talk_wave/common/utils/utils.dart';
+import 'package:talk_wave/features/group/screens/create_group_screen.dart';
 
 class MobileLayoutScreen extends ConsumerStatefulWidget {
   const MobileLayoutScreen({Key? key}) : super(key: key);
@@ -57,22 +58,34 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
           backgroundColor: appBarColor,
           centerTitle: false,
           title: const Text(
-            'WhatsApp',
+            'TalkWave',
             style: TextStyle(
               fontSize: 20,
               color: Colors.grey,
               fontWeight: FontWeight.bold,
             ),
           ),
-          actions: [
+          actions:[
             IconButton(
               icon: const Icon(Icons.search, color: Colors.grey),
               onPressed: () {},
             ),
-            IconButton(
-              icon: const Icon(Icons.more_vert,
-                color: Colors.grey,),
-              onPressed: () {},
+            PopupMenuButton(
+              icon: const Icon(
+                Icons.more_vert,
+                color: Colors.grey,
+              ),
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  child: const Text(
+                    'Create Group',
+                  ),
+                  onTap: () => Future(
+                    () => Navigator.pushNamed(
+                        context, CreateGroupScreen.routeName),
+                  ),
+                )
+              ],
             ),
           ],
           bottom: TabBar(
