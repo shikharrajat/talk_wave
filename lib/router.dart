@@ -9,6 +9,8 @@ import 'package:talk_wave/features/select_contacts/screens/select_contact_screen
 import 'package:talk_wave/features/stories/screens/confirm_stories_screen.dart';
 import 'package:talk_wave/features/stories/screens/stories_screen.dart';
 import 'package:talk_wave/models/stories_model.dart';
+import 'package:talk_wave/features/group/screens/create_group_screen.dart';
+
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case LoginScreen.routeName:
@@ -31,15 +33,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         builder: (context) => const SelectContactsScreen(),
       );
     case MobileChatScreen.routeName:
-       final arguments = settings.arguments as Map<String, dynamic>;
+      final arguments = settings.arguments as Map<String, dynamic>;
       final name = arguments['name'];
       final uid = arguments['uid'];
-     
+      final isGroupChat = arguments['isGroupChat'];
       return MaterialPageRoute(
         builder: (context) => MobileChatScreen(
           name: name,
           uid: uid,
-         
+          isGroupChat: isGroupChat,      
         ),
       );
        case ConfirmStatusScreen.routeName:
@@ -55,12 +57,16 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         builder: (context) => StatusScreen(
           status: status,
         ),
-      );  
+      ); 
+      case CreateGroupScreen.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const CreateGroupScreen(),
+      );
     default:
       return MaterialPageRoute(
         builder: (context) => const Scaffold(
-          body: ErrorScreen(error: 'this page does\'t exist'),
+          body: ErrorScreen(error: 'This page doesn\'t exist'),
         ),
-      );
+      ); 
   }
 }
