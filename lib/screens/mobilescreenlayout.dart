@@ -1,9 +1,13 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:talk_wave/features/select_contacts/screens/select_contact_screen.dart';
 import '../common/utils/colors.dart';
 import '../features/chat/widgets/contact_list.dart';
 import 'package:talk_wave/features/auth/controller/auth_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:talk_wave/features/stories/screens/confirm_stories_screen.dart';
+import 'package:talk_wave/features/stories/screens/stories_contact_screen.dart';
+import 'package:talk_wave/common/utils/utils.dart';
 
 class MobileLayoutScreen extends ConsumerStatefulWidget {
   const MobileLayoutScreen({Key? key}) : super(key: key);
@@ -13,11 +17,12 @@ class MobileLayoutScreen extends ConsumerStatefulWidget {
 }
 
 class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
-    with WidgetsBindingObserver {
-
- @override
+    with WidgetsBindingObserver, TickerProviderStateMixin {
+  late TabController tabBarController;
+  @override
   void initState() {
     super.initState();
+    tabBarController = TabController(length: 3, vsync: this);
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -41,39 +46,45 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
         break;
     }
   }
- 
- @override
+  
+  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: appbarColor,
-          title: const Text('TalkWave',
-              style: TextStyle(
-                  color: Color.fromARGB(255, 32, 123, 227),
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold)),
+          elevation: 0,
+          backgroundColor: appBarColor,
           centerTitle: false,
+          title: const Text(
+            'WhatsApp',
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.grey,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           actions: [
             IconButton(
-              icon: const Icon(Icons.search, color: Colors.blue),
+              icon: const Icon(Icons.search, color: Colors.grey),
               onPressed: () {},
             ),
             IconButton(
-              icon: const Icon(Icons.more_vert, color: Colors.blue),
+              icon: const Icon(Icons.more_vert,
+                color: Colors.grey,),
               onPressed: () {},
             ),
           ],
-          bottom: const TabBar(
+          bottom: TabBar(
+            controller: tabBarController,
             indicatorColor: tabColor,
             indicatorWeight: 4,
             labelColor: tabColor,
-            unselectedLabelColor: Colors.blueAccent,
-            labelStyle: TextStyle(
+            unselectedLabelColor: Colors.grey,
+            labelStyle: const TextStyle(
               fontWeight: FontWeight.bold,
             ),
-            tabs: [
+            tabs: const [
               Tab(
                 text: 'CHATS',
               ),
@@ -86,10 +97,28 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
             ],
           ),
         ),
-        body: const ContactsList(),
+        body: TabBarView(
+          controller: tabBarController,
+          children: const [
+            ContactsList(),
+            StatusContactsScreen(),
+            Text('Calls')
+          ],
+        ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushNamed(context, SelectContactsScreen.routeName);
+          onPressed: () async {
+            if (tabBarController.index == 0) {
+              Navigator.pushNamed(context, SelectContactsScreen.routeName);
+            } else {
+              File? pickedImage = await pickImageFromGallery(context);
+              if (pickedImage != null) {
+                Navigator.pushNamed(
+                  context,
+                  ConfirmStatusScreen.routeName,
+                  arguments: pickedImage,
+                );
+              }
+            }
           },
           backgroundColor: tabColor,
           child: const Icon(
