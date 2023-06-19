@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:talk_wave/features/chat/controller/chat_controller.dart';
 import 'package:talk_wave/models/message.dart';
 import 'package:talk_wave/features/chat/widgets/sender_message_card.dart';
-import '/info.dart';
 import 'package:talk_wave/features/chat/widgets/my_message_card.dart';
 import 'package:talk_wave/common/widgets/loader.dart';
 import 'package:intl/intl.dart';
@@ -12,17 +11,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:talk_wave/common/providers/message_relpy_provider.dart';
 import 'package:talk_wave/common/enums/message_enum.dart';
 
-
 class ChatList extends ConsumerStatefulWidget {
   final String recieverUserId;
-  const ChatList({Key? key, required this.recieverUserId}) : super(key: key);
+  final bool isGroupChat;
+  const ChatList({
+    Key? key,
+    required this.recieverUserId,
+    required this.isGroupChat,
+  }) : super(key: key);
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _ChatListState();
 }
 
 class _ChatListState extends ConsumerState<ChatList> {
-final ScrollController messageController = ScrollController();
+  final ScrollController messageController = ScrollController();
 
   @override
   void dispose() {
@@ -47,8 +50,11 @@ final ScrollController messageController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<Message>>(
-        stream: 
-             ref
+        stream: widget.isGroupChat
+            ? ref
+                .read(chatControllerProvider)
+                .groupChatStream(widget.recieverUserId)
+            : ref
                 .read(chatControllerProvider)
                 .chatStream(widget.recieverUserId),
         builder: (context, snapshot) {

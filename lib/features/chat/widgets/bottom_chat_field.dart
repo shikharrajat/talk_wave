@@ -14,10 +14,11 @@ import 'package:talk_wave/features/chat/widgets/message_reply_preview.dart';
 
 class BottomChatField extends ConsumerStatefulWidget {
   final String recieverUserId;
- 
+  final bool isGroupChat;
   const BottomChatField({
     Key? key,
     required this.recieverUserId,
+    required this.isGroupChat,
   }) : super(key: key);
 
   @override
@@ -55,6 +56,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
             context,
             _messageController.text.trim(),
             widget.recieverUserId,
+            widget.isGroupChat,
           );
       setState(() {
         _messageController.text = '';
@@ -89,7 +91,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
           file,
           widget.recieverUserId,
           messageEnum,
-     
+          widget.isGroupChat,
         );
   }
 
@@ -114,7 +116,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
             context,
             gif.url,
             widget.recieverUserId,
-   
+            widget.isGroupChat,
           );
     }
   }
