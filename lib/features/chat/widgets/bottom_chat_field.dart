@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:talk_wave/common/utils/colors.dart';
 import 'package:talk_wave/features/chat/controller/chat_controller.dart';
 import 'package:talk_wave/common/enums/message_enum.dart';
 import 'package:talk_wave/common/utils/utils.dart';
@@ -180,54 +179,53 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                 },
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: mobileChatBoxColor,
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: SizedBox(
-                      width: 100,
-                      child: Row(
-                        children: [
-                          IconButton(
+                  fillColor: Theme.of(context).colorScheme.secondary.withAlpha(150),
+                  prefixIcon: IconButton(
                             onPressed: toggleEmojiKeyboardContainer,
-                            icon: const Icon(
-                              Icons.emoji_emotions,
-                              color: Colors.grey,
+                            icon: Icon(
+                              Icons.emoji_emotions_outlined,
+                              color: IconTheme.of(context).color
                             ),
                           ),
-                          IconButton(
-                            onPressed: selectGIF,
-                            icon: const Icon(
-                              Icons.gif,
-                              color: Colors.grey,
-                            ),
+                  
+                suffixIcon: isShowSendButton? IconButton(
+                          onPressed: selectVideo,
+                          icon:  Icon(
+                            Icons.attach_file,
+                            color:IconTheme.of(context).color
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  suffixIcon: SizedBox(
-                    width: 100,
+                        ) : SizedBox(
+                    width: 150,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         IconButton(
+                            onPressed: selectGIF,
+                            icon:Icon(
+                              Icons.gif,
+                              color: IconTheme.of(context).color
+                            ),
+                          ),
+                        IconButton(
                           onPressed: selectImage,
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.camera_alt,
-                            color: Colors.grey,
+                            color: IconTheme.of(context).color,
                           ),
                         ),
                         IconButton(
                           onPressed: selectVideo,
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.attach_file,
-                            color: Colors.grey,
+                            color:IconTheme.of(context).color
                           ),
                         ),
                       ],
                     ),
                   ),
-                  hintText: 'Type a message!',
+                  hintText: 'Message...',
+                  hintStyle: Theme.of(context)
+                  .textTheme.bodyLarge,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),
                     borderSide: const BorderSide(
@@ -235,7 +233,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                       style: BorderStyle.none,
                     ),
                   ),
-                  contentPadding: const EdgeInsets.all(10),
+                  contentPadding: const EdgeInsets.all(5),
                 ),
               ),
             ),
@@ -256,6 +254,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
                             ? Icons.close
                             : Icons.mic,
                     color: Colors.white,
+                    
                   ),
                   onTap: sendTextMessage,
                 ),
@@ -265,14 +264,13 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
         ),
         isShowEmojiContainer
             ? SizedBox(
-                height: 310,
+                height: 250,
                 child: EmojiPicker(
                   onEmojiSelected: ((category, emoji) {
                     setState(() {
                       _messageController.text =
                           _messageController.text + emoji.emoji;
                     });
-
                     if (!isShowSendButton) {
                       setState(() {
                         isShowSendButton = true;

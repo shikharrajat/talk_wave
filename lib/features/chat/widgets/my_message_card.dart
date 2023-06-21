@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:talk_wave/common/enums/message_enum.dart';
-import '../../../common/utils/colors.dart';
 import 'package:talk_wave/features/chat/widgets/display_text_image_gif.dart';
 import 'package:swipe_to/swipe_to.dart';
 
@@ -37,12 +36,14 @@ class MyMessageCard extends StatelessWidget {
         child: ConstrainedBox(
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width - 45,
+            minWidth: 120,
+            minHeight: 60,
           ),
           child: Card(
             elevation: 1,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            color: messageColor,
+            color: Theme.of(context).colorScheme.secondary,
             margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
             child: Stack(
               children: [
@@ -65,15 +66,14 @@ class MyMessageCard extends StatelessWidget {
                       if (isReplying) ...[
                         Text(
                           username,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context)
+                  .textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold)
                         ),
                         const SizedBox(height: 3),
                         Container(
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: backgroundColor.withOpacity(0.5),
+                            color: Theme.of(context).colorScheme.primary,
                             borderRadius: const BorderRadius.all(
                               Radius.circular(
                                 5,
@@ -101,9 +101,9 @@ class MyMessageCard extends StatelessWidget {
                     children: [
                       Text(
                         date,
-                        style: const TextStyle(
+                        style:  TextStyle(
                           fontSize: 13,
-                          color: Colors.white60,
+                          color: ThemeData().colorScheme.scrim,
                         ),
                       ),
                       const SizedBox(
@@ -112,7 +112,7 @@ class MyMessageCard extends StatelessWidget {
                       Icon(
                         isSeen ? Icons.done_all : Icons.done,
                         size: 20,
-                        color: isSeen ? Colors.blue : Colors.white60,
+                        color: isSeen ? Colors.blue : ThemeData().colorScheme.scrim,
                       ),
                     ],
                   ),

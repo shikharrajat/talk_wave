@@ -17,9 +17,9 @@ class MessageReplyPreview extends ConsumerWidget {
     return Container(
       width: 350,
       padding: const EdgeInsets.all(8),
-      decoration: const BoxDecoration(
-        color: Colors.transparent,
-        borderRadius: BorderRadius.only(
+      decoration:  BoxDecoration(
+        color: Theme.of(context).colorScheme.secondary,
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(12),
           topRight: Radius.circular(12),
         ),
@@ -31,15 +31,14 @@ class MessageReplyPreview extends ConsumerWidget {
               Expanded(
                 child: Text(
                   messageReply!.isMe ? 'Me' : 'Opposite',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: ThemeData().textTheme.bodyLarge
                 ),
               ),
               GestureDetector(
-                child: const Icon(
+                child: Icon(
                   Icons.close,
                   size: 16,
+                  color: IconTheme.of(context).color,
                 ),
                 onTap: () => cancelReply(ref),
               ),

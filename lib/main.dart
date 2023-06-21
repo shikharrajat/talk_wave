@@ -2,14 +2,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'screens/mobilescreenlayout.dart';
-import 'common/utils/colors.dart';
 import 'package:talk_wave/firebase_options.dart';
 import 'features/landing/screens/landing_screen.dart';
 import 'router.dart';
 import 'package:talk_wave/common/widgets/loader.dart';
 import 'package:talk_wave/common/widgets/error.dart';
 import 'features/auth/controller/auth_controller.dart';
-
+import 'theme.dart';
+import 'package:get/get.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -25,12 +25,11 @@ class TalkWave extends ConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp(
+    return GetMaterialApp(
         title: 'TalkWave',
-        theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: backgroundColor,
-          appBarTheme: const AppBarTheme(color: appBarColor),
-        ),
+        
+       theme: lightTheme(),
+      darkTheme: darkTheme(),
         onGenerateRoute: ((settings) => generateRoute(settings)),
         home: ref.watch(userDataAuthProvider).when(
             data: (user) {

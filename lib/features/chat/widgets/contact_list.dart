@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import '../../../common/utils/colors.dart';
+import 'package:talk_wave/features/select_contacts/screens/select_contact_screen.dart';
 import '/common/widgets/loader.dart';
 import '/features/chat/controller/chat_controller.dart';
 import '/features/chat/screens/mobile_chat_screen.dart';
 import '/models/chat_contact.dart';
 import 'package:talk_wave/models/group.dart';
-
-
+import 'package:talk_wave/widgets/custom_container.dart';
 
 class ContactsList extends ConsumerWidget {
-  const ContactsList({Key? key}) : super(key: key);
+  final double height;
+  const ContactsList({Key? key, required this.height}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10.0),
+    return CustomContainer(
+      height: height * 0.7,
       child: SingleChildScrollView(
         child: Column(
           children: [
-           StreamBuilder<List<Group>>(
+            StreamBuilder<List<Group>>(
                 stream: ref.watch(chatControllerProvider).chatGroups(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
@@ -53,15 +53,18 @@ class ContactsList extends ConsumerWidget {
                               child: ListTile(
                                 title: Text(
                                   groupData.name,
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                  ),
+                                  style: Theme.of(context)
+                  .textTheme.bodyLarge!
+                  .copyWith(fontWeight: FontWeight.w400,fontSize: 20),
+                  
                                 ),
                                 subtitle: Padding(
                                   padding: const EdgeInsets.only(top: 6.0),
                                   child: Text(
                                     groupData.lastMessage,
-                                    style: const TextStyle(fontSize: 15),
+                                    style:Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
                                   ),
                                 ),
                                 leading: CircleAvatar(
@@ -72,15 +75,15 @@ class ContactsList extends ConsumerWidget {
                                 ),
                                 trailing: Text(
                                   DateFormat.Hm().format(groupData.timeSent),
-                                  style: const TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 13,
-                                  ),
+                                  style:Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  
                                 ),
                               ),
                             ),
                           ),
-                          const Divider(color: dividerColor, indent: 85),
+                          
                         ],
                       );
                     },
@@ -119,15 +122,16 @@ class ContactsList extends ConsumerWidget {
                               child: ListTile(
                                 title: Text(
                                   chatContactData.name,
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                  ),
+                                  style: Theme.of(context)
+                  .textTheme.bodyLarge!
+                  .copyWith(fontWeight: FontWeight.w400,fontSize: 20),
                                 ),
                                 subtitle: Padding(
                                   padding: const EdgeInsets.only(top: 6.0),
                                   child: Text(
                                     chatContactData.lastMessage,
-                                    style: const TextStyle(fontSize: 15),
+                                    style: Theme.of(context)
+                  .textTheme.bodyMedium!
                                   ),
                                 ),
                                 leading: CircleAvatar(
@@ -139,21 +143,35 @@ class ContactsList extends ConsumerWidget {
                                 trailing: Text(
                                   DateFormat.Hm()
                                       .format(chatContactData.timeSent),
-                                  style: const TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 13,
-                                  ),
+                                  style: Theme.of(context)
+                  .textTheme.bodySmall!
                                 ),
                               ),
                             ),
                           ),
-                          const Divider(color: dividerColor, indent: 85),
+                         
                         ],
                       );
                     },
                   );
                 }),
+                Align(
+                  alignment: Alignment.bottomRight,
+                 
+                  child: FloatingActionButton( onPressed: () async {
+                             
+                              Navigator.pushNamed(context, SelectContactsScreen.routeName);    
+                          },
+                          elevation: 5,
+                          backgroundColor:Theme.of(context).colorScheme.secondary.withAlpha(150),
+                          child:  Icon(
+                        size:  30 ,                            Icons.person_add_alt_1,
+                            color:IconTheme.of(context).color,
+                          ),),
+                )
+                
           ],
+          
         ),
       ),
     );

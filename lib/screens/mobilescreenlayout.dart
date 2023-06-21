@@ -1,14 +1,16 @@
-import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:talk_wave/features/select_contacts/screens/select_contact_screen.dart';
-import '../common/utils/colors.dart';
+
 import '../features/chat/widgets/contact_list.dart';
 import 'package:talk_wave/features/auth/controller/auth_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:talk_wave/features/stories/screens/confirm_stories_screen.dart';
+
 import 'package:talk_wave/features/stories/screens/stories_contact_screen.dart';
-import 'package:talk_wave/common/utils/utils.dart';
+
 import 'package:talk_wave/features/group/screens/create_group_screen.dart';
+import 'package:get/get.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class MobileLayoutScreen extends ConsumerStatefulWidget {
   const MobileLayoutScreen({Key? key}) : super(key: key);
@@ -47,97 +49,108 @@ class _MobileLayoutScreenState extends ConsumerState<MobileLayoutScreen>
         break;
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
+    Size size = MediaQuery.of(context).size;
+    double height = size.height;
+   
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.topRight,
+          colors: [
+            Theme.of(context).colorScheme.primary,
+            Theme.of(context).colorScheme.secondary,
+          ],
+        ),
+      ),
       child: Scaffold(
         appBar: AppBar(
-          elevation: 0,
-          backgroundColor: appBarColor,
-          centerTitle: false,
-          title: const Text(
+          title: Text(
             'TalkWave',
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.grey,
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge!
+                .copyWith(fontWeight: FontWeight.bold, fontSize: 25),
           ),
-          actions:[
+          centerTitle: false,
+          elevation: 0,
+          actions: [
             IconButton(
-              icon: const Icon(Icons.search, color: Colors.grey),
+              icon: Icon(Icons.search, color: IconTheme.of(context).color),
               onPressed: () {},
             ),
+            IconButton(
+              icon: Icon(
+                Get.isDarkMode ? Icons.dark_mode : Icons.light_mode,
+                color: IconTheme.of(context).color,
+              ),
+              onPressed: () {
+                Get.changeThemeMode(
+                  Get.isDarkMode ? ThemeMode.light : ThemeMode.dark,
+                );
+              },
+            ),
             PopupMenuButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.more_vert,
-                color: Colors.grey,
+                color: IconTheme.of(context).color,
               ),
               itemBuilder: (context) => [
                 PopupMenuItem(
-                  child: const Text(
+                  child: Text(
                     'Create Group',
+                    style: Theme.of(context).textTheme.bodyLarge!,
                   ),
                   onTap: () => Future(
                     () => Navigator.pushNamed(
                         context, CreateGroupScreen.routeName),
                   ),
-                )
+                ),
+                PopupMenuItem(
+                  child: Text(
+                    'Log Out',
+                    style: Theme.of(context).textTheme.bodyLarge!,
+                  ),
+                  onTap: () async {
+                    FirebaseAuth.instance.signOut();
+                   
+                  },
+                ),
               ],
             ),
           ],
-          bottom: TabBar(
-            controller: tabBarController,
-            indicatorColor: tabColor,
-            indicatorWeight: 4,
-            labelColor: tabColor,
-            unselectedLabelColor: Colors.grey,
-            labelStyle: const TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-            tabs: const [
-              Tab(
-                text: 'CHATS',
-              ),
-              Tab(
-                text: 'STATUS',
-              ),
-              Tab(
-                text: 'CALLS',
-              ),
-            ],
+        ),
+        bottomNavigationBar: TabBar(
+          controller: tabBarController,
+          indicatorColor: IconTheme.of(context).color,
+          indicatorWeight: 2,
+          labelColor: IconTheme.of(context).color,
+          unselectedLabelColor: Colors.grey,
+          labelStyle: const TextStyle(
+            fontWeight: FontWeight.bold,
           ),
+          tabs: const [
+            Tab(
+              icon: Icon(Icons.message),
+              text: 'Chats',
+            ),
+            Tab(
+              icon: Icon(Icons.movie_filter_rounded),
+              text: 'stories',
+            ),
+            Tab(icon: Icon(Icons.call, size: 30), text: 'Calls'),
+          ],
         ),
         body: TabBarView(
           controller: tabBarController,
-          children: const [
-            ContactsList(),
-            StatusContactsScreen(),
-            Text('Calls')
+          children: [
+            ContactsList(height: height),
+            StatusContactsScreen(height: height),
+            const Text('Calls')
           ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            if (tabBarController.index == 0) {
-              Navigator.pushNamed(context, SelectContactsScreen.routeName);
-            } else {
-              File? pickedImage = await pickImageFromGallery(context);
-              if (pickedImage != null) {
-                Navigator.pushNamed(
-                  context,
-                  ConfirmStatusScreen.routeName,
-                  arguments: pickedImage,
-                );
-              }
-            }
-          },
-          backgroundColor: tabColor,
-          child: const Icon(
-            Icons.comment,
-            color: Colors.white,
-          ),
         ),
       ),
     );

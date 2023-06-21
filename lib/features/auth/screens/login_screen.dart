@@ -1,10 +1,9 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../common/utils/colors.dart';
 import '/common/utils/utils.dart';
-import '/common/widgets/custom_button.dart';
 import '/features/auth/controller/auth_controller.dart';
+
 
 class LoginScreen extends ConsumerStatefulWidget {
   static const routeName = '/login-screen';
@@ -48,24 +47,33 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Enter your phone number'),
-        elevation: 0,
-        backgroundColor: backgroundColor,
-      ),
+       
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SingleChildScrollView(
         child: Padding(
+          
           padding: const EdgeInsets.all(18.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text('WhatsApp will need to verify your phone number.'),
-              const SizedBox(height: 10),
+            children: [  SizedBox(height: size.height/12)
+              ,Text('Enter your phone number',style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!.copyWith(fontWeight: FontWeight.w600,fontSize: 30)
+                  ,),
+                SizedBox(height: size.height/20),
+               Text('TalkWave will need to verify your phone number.',style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  ,),
+               SizedBox(height: size.height/12 ),
               TextButton(
                 onPressed: pickCountry,
-                child: const Text('Pick Country'),
+                child:  Text('Pick Country',style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!.copyWith(fontWeight: FontWeight.w500,fontSize: 20)
+                 ),
               ),
-              const SizedBox(height: 5),
+               SizedBox(height: size.height/25 ),
               Row(
                 children: [
                   if (country != null) Text('+${country!.phoneCode}'),
@@ -74,21 +82,49 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     width: size.width * 0.7,
                     child: TextField(
                       controller: phoneController,
-                      decoration: const InputDecoration(
+                      style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!,
+                      decoration:  InputDecoration(
                         hintText: 'phone number',
+                        hintStyle:  Theme.of(context)
+                  .textTheme.titleMedium
                       ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: size.height * 0.6),
-              SizedBox(
-                width: 90,
-                child: CustomButton(
-                  onPressed: sendPhoneNumber,
-                  text: 'NEXT',
-                ),
+              SizedBox(height: size.height * 0.4),
+               FittedBox(
+                child: TextButton(
+                    onPressed: sendPhoneNumber,
+                    child: Row(
+                      children: [
+                        Text(
+                          "Next",
+                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .color!,fontWeight: FontWeight.w500,fontSize: 25
+                              ),
+                        ),
+                         SizedBox(height: size.height / 9),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          size: 20,
+                          color: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .color!,
+                              
+                        )
+                      ],
+                    )
+                    ),
               ),
+              
+            
             ],
           ),
         ),

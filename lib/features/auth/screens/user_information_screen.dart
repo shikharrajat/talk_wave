@@ -45,20 +45,21 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
+         backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Center(
           child: Column(
             children: [
+              SizedBox(height: size.height/7),
               Stack(
                 children: [
-                  image == null
-                      ? const CircleAvatar(
+                   image == null?
+                       const CircleAvatar(
                           backgroundImage: NetworkImage(
                             'https://png.pngitem.com/pimgs/s/649-6490124_katie-notopoulos-katienotopoulos-i-write-about-tech-round.png',
                           ),
                           radius: 64,
-                        )
-                      : CircleAvatar(
+                        ): CircleAvatar(
                           backgroundImage: FileImage(
                             image!,
                           ),
@@ -68,9 +69,11 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
                     bottom: -10,
                     left: 80,
                     child: IconButton(
-                      onPressed: selectImage,
-                      icon: const Icon(
+                      onPressed: selectImage ,
+                      icon: Icon(
                         Icons.add_a_photo,
+                         color: Theme.of(context)
+                  .textTheme.bodySmall!.color ,
                       ),
                     ),
                   ),
@@ -82,16 +85,21 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
                     width: size.width * 0.85,
                     padding: const EdgeInsets.all(20),
                     child: TextField(
-                      controller: nameController,
-                      decoration: const InputDecoration(
+                      style: Theme.of(context)
+                  .textTheme.bodyLarge!,
+                      decoration: InputDecoration(
                         hintText: 'Enter your name',
+                        hintStyle: Theme.of(context)
+                  .textTheme.bodyLarge,
                       ),
                     ),
                   ),
                   IconButton(
-                    onPressed: storeUserData,
-                    icon: const Icon(
+                    onPressed: storeUserData ,
+                    icon: Icon(
                       Icons.done,
+                      color: Theme.of(context)
+                  .textTheme.bodySmall!.color ,
                     ),
                   ),
                 ],

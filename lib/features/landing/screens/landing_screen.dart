@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../common/utils/colors.dart';
-import 'package:talk_wave/common/widgets/custom_button.dart';
 import 'package:talk_wave/features/auth/screens/login_screen.dart';
+
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({Key? key}) : super(key: key);
@@ -13,47 +12,60 @@ class LandingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 50),
-            const Text(
-              'Welcome to WhatsApp',
+            const Spacer(flex: 2),
+            Image.asset("assets/images/welcome_image.png"),
+            const Spacer(flex: 3),
+            Text(
+              "Welcome to TalkWave",
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(fontWeight: FontWeight.bold, fontSize: 33),
+            ),
+            SizedBox(height: size.height / 9),
+            Text(
+              'Read our Privacy Policy. Tap "Agree and continue" \nto accept the Terms of Service.',
+              textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 33,
-                fontWeight: FontWeight.w600,
+                color: Theme.of(context).textTheme.bodySmall!.color!,
               ),
             ),
-            SizedBox(height: size.height / 9),
-            Image.asset(
-              'assets/landing_bg.png',
-              height: 340,
-              width: 340,
-              
-            ),
-            SizedBox(height: size.height / 9),
-            const Padding(
-              padding: EdgeInsets.all(15.0),
-              child: Text(
-                'Read our Privacy Policy. Tap "Agree and continue" to accept the Terms of Service.',
-                style: TextStyle(color: greyColor),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            const SizedBox(height: 10),
-            SizedBox(
-              width: size.width * 0.75,
-              child: CustomButton(
-                text: 'AGREE AND CONTINUE',
-                onPressed: () => navigateToLoginScreen(context),
-              ),
-            ),
+            const Spacer(flex: 3),
+            FittedBox(
+              child: TextButton(
+                  onPressed: () => navigateToLoginScreen(context),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Agree and Continue",
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            color:
+                                Theme.of(context).textTheme.titleMedium!.color!,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      SizedBox(height: size.height / 9),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        size: 16,
+                        color: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .color!
+                            .withOpacity(0.8),
+                      )
+                    ],
+                  )),
+            )
           ],
         ),
       ),
     );
   }
-}
+} 
+    
