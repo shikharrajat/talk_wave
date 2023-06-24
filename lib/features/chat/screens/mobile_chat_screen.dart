@@ -7,6 +7,7 @@ import 'package:talk_wave/features/auth/controller/auth_controller.dart';
 import 'package:talk_wave/common/widgets/loader.dart';
 import 'package:talk_wave/features/chat/widgets/bottom_chat_field.dart';
 import 'package:talk_wave/widgets/custom_container.dart';
+import 'package:talk_wave/features/calls/controller/call_controller.dart';
 
 class MobileChatScreen extends ConsumerWidget {
   static const String routeName = '/mobile_chat_screen';
@@ -22,7 +23,7 @@ class MobileChatScreen extends ConsumerWidget {
       required this.profilePic})
       : super(key: key);
 
- /* void makeCall(WidgetRef ref, BuildContext context) {
+ void makeCall(WidgetRef ref, BuildContext context) {
     ref.read(callControllerProvider).makeCall(
           context,
           name,
@@ -30,7 +31,7 @@ class MobileChatScreen extends ConsumerWidget {
           profilePic,
           isGroupChat,
         );
-  } */
+  } 
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -89,7 +90,7 @@ class MobileChatScreen extends ConsumerWidget {
         ),
         IconButton(
           icon: const Icon(Icons.videocam),
-          onPressed: () {},
+          onPressed:() => makeCall(ref,context),
         ),
         const SizedBox(width: kDefaultPadding / 2),],
     ) ,

@@ -26,6 +26,7 @@ class TalkWave extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
         title: 'TalkWave',
         
        theme: lightTheme(),
