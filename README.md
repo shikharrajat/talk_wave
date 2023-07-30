@@ -1,5 +1,5 @@
 # TalkWave
-TalkWave is a feature-rich messaging app developed by the Coding Club, IIT Guwahati. It boasts a comprehensive set of features like Phone Number Authentication, multimedia sharing, real-time video calling, group chatting, a user-exclusive story feature, and much more, all designed to provide a seamless and secure user experience.
+TalkWave is a feature-rich messaging app. It boasts a comprehensive set of features like Phone Number Authentication, multimedia sharing, real-time video calling, group chatting, a user-exclusive story feature, and much more, all designed to provide a seamless and secure user experience.
 
 
 ### Features
